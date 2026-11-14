@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>霓虹招牌定制预览工作台</title>
+  <script type="module" crossorigin src="./assets/index-CHEzCC4q.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-YnjCuvQq.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="brand">霓虹招牌工作台</div>
+      <input id="project-name" class="project-name" value="未命名招牌方案" title="方案名称">
+      <div class="top-actions">
+        <button id="btn-new" class="btn">新建</button>
+        <button id="btn-save" class="btn primary">保存到本地</button>
+        <button id="btn-open" class="btn">打开</button>
+        <button id="btn-import" class="btn">导入文件</button>
+        <input type="file" id="file-import" accept=".json,application/json" hidden>
+        <button id="btn-export-drawing" class="btn">施工图</button>
+        <button id="btn-export-bom" class="btn">材料清单</button>
+        <button id="btn-export-client" class="btn accent">导出客户预览</button>
+        <button id="btn-export-json" class="btn">方案文件</button>
+      </div>
+    </header>
+
+    <div id="workspace">
+      <aside id="left-panel" class="panel">
+        <section class="group">
+          <h3>工具</h3>
+          <div class="tool-grid">
+            <button class="tool-btn active" data-tool="select">🖱 选择/移动</button>
+            <button class="tool-btn" data-tool="tube-single">➖ 单色灯管</button>
+            <button class="tool-btn" data-tool="tube-dual">🔀 双色灯管</button>
+            <button class="tool-btn" data-tool="acrylic">🔤 亚克力字</button>
+            <button class="tool-btn" data-tool="radius">📐 折弯半径</button>
+          </div>
+          <div id="draw-actions" class="draw-actions hidden">
+            <button id="btn-finish-draft" class="btn small primary">完成绘制 (Enter)</button>
+            <button id="btn-cancel-draft" class="btn small">取消 (Esc)</button>
+            <div class="hint">左键加点 · 右键撤销点 · 双击/Enter 完成</div>
+          </div>
+        </section>
+
+        <section class="group">
+          <h3>发光颜色</h3>
+          <div class="row">
+            <label>主色</label>
+            <input type="color" id="color-main" value="#ff3cb4">
+            <div id="swatches" class="swatches"></div>
+          </div>
+          <div class="row hidden" id="row-color2">
+            <label>副色</label>
+            <input type="color" id="color-second" value="#50dcdc">
+          </div>
+          <div class="row hidden" id="row-dual-period">
+            <label>交替周期</label>
+            <input type="number" id="dual-period" value="300" min="50" step="50"> mm
+          </div>
+        </section>
+
+        <section class="group">
+          <h3>招牌与墙面 (mm)</h3>
+          <div class="grid2">
+            <label>墙宽 <input type="number" id="wall-w" min="100" step="10"></label>
+            <label>墙高 <input type="number" id="wall-h" min="100" step="10"></label>
+            <label>网格 <input type="number" id="grid-size" min="10" step="10"></label>
+            <label>灯管直径 <input type="number" id="tube-dia" min="3" max="30" step="1"></label>
+          </div>
+          <div class="row photo-row">
+            <label>墙面照片</label>
+            <button id="btn-photo" class="btn small">上传本地照片</button>
+            <button id="btn-photo-clear" class="btn small hidden">清除</button>
+            <input type="file" id="file-photo" accept="image/*" hidden>
+          </div>
+        </section>
+
+        <section class="group hidden" id="group-acrylic">
+          <h3>亚克力发光字</h3>
+          <label class="block">文字内容 <input type="text" id="acrylic-text" placeholder="例如 OPEN" maxlength="12"></label>
+          <div class="grid2">
+            <label>字高 mm <input type="number" id="acrylic-size" value="300" min="50" step="10"></label>
+            <label>描边宽 mm <input type="number" id="acrylic-stroke" value="10" min="3" step="1"></label>
+          </div>
+          <div class="row photo-row">
+            <label>字库</label>
+            <select id="font-select"><option value="default">Roboto（内置）</option></select>
+            <button id="btn-font-upload" class="btn small">上传字体</button>
+            <input type="file" id="file-font" accept=".ttf,.otf" hidden>
+          </div>
+          <button id="btn-place-text" class="btn primary small">生成并放置（再点画布）</button>
+          <div class="hint">生成后可用选择工具拖动顶点手动调笔画</div>
+        </section>
+
+        <section class="group hidden" id="group-radius">
+          <h3>折弯半径</h3>
+          <div id="radius-editor">
+            <div class="hint">选中一根灯管后调整全部折角半径；小于直径 2 倍将标红。</div>
+            <label class="block">半径 mm <input type="number" id="radius-value" min="0" step="1"></label>
+          </div>
+        </section>
+
+        <section class="group">
+          <h3>选中元素</h3>
+          <div id="selection-props" class="hint">未选中元素</div>
+        </section>
+
+        <section class="group">
+          <h3>电气与单价设置</h3>
+          <details>
+            <summary class="clickable">展开参数 / 材料单价</summary>
+            <div class="grid2 settings-grid">
+              <label>功率 W/m <input type="number" id="set-wm" min="1" step="0.5"></label>
+              <label>单根限长 mm <input type="number" id="set-maxlen" min="500" step="100"></label>
+              <label>余量比例 <input type="number" id="set-margin" min="0.3" max="1" step="0.05"></label>
+              <label>单色 元/m <input type="number" id="price-single" step="1"></label>
+              <label>双色 元/m <input type="number" id="price-dual" step="1"></label>
+              <label>接头 元/个 <input type="number" id="price-connector" step="1"></label>
+              <label>亚克力 元/cm字高 <input type="number" id="price-acrylic" step="0.1"></label>
+              <label>底板 元/㎡ <input type="number" id="price-wall" step="1"></label>
+            </div>
+          </details>
+        </section>
+      </aside>
+
+      <main id="stage-wrap">
+        <div id="canvas-stack">
+          <canvas id="gl-canvas"></canvas>
+          <canvas id="overlay-canvas"></canvas>
+        </div>
+        <div id="statusbar">
+          <span id="status-coords">— , —</span>
+          <span id="status-snap"></span>
+          <span id="status-hint">滚轮缩放 · 中键/右键拖动平移 · Delete 删除 · Ctrl+D 复制 · Ctrl+Z 撤销</span>
+        </div>
+      </main>
+
+      <aside id="right-panel" class="panel">
+        <section class="group">
+          <h3>实时发光效果</h3>
+          <canvas id="preview-canvas"></canvas>
+          <div class="env-row">
+            <button class="env-btn" data-env="day">白天</button>
+            <button class="env-btn" data-env="dusk">黄昏</button>
+            <button class="env-btn active" data-env="night">深夜</button>
+          </div>
+          <label class="block">泛光强度 <span id="val-bloom-intensity"></span>
+            <input type="range" id="bloom-intensity" min="0" max="2" step="0.05" value="1">
+          </label>
+          <label class="block">光晕半径 <span id="val-bloom-radius"></span>
+            <input type="range" id="bloom-radius" min="0" max="1" step="0.05" value="0.5">
+          </label>
+        </section>
+
+        <section class="group">
+          <h3>自动统计</h3>
+          <table id="stats-table" class="data-table"></table>
+          <div id="warnings" class="warnings"></div>
+        </section>
+
+        <section class="group">
+          <h3>变压器配置</h3>
+          <table id="transformer-table" class="data-table"></table>
+        </section>
+
+        <section class="group">
+          <h3>报价</h3>
+          <table id="quote-table" class="data-table"></table>
+          <div id="quote-total" class="quote-total"></div>
+        </section>
+
+        <section class="group">
+          <h3>本地方案</h3>
+          <div id="local-projects" class="local-list"></div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
