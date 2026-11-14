@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>" />
+    <title>改色贴膜预览工坊</title>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-logo">🎨</span>
+        <div>
+          <h1>改色贴膜预览工坊</h1>
+          <p class="sub">选车型 · 配颜色 · 算用料 · 出报价</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span id="save-status" class="save-status">已自动保存</span>
+        <button id="btn-reset" class="btn btn-ghost btn-danger">恢复默认</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="design"><span class="tab-no">1</span>车型与配色</button>
+      <button class="tab" data-tab="seams"><span class="tab-no">2</span>接缝与用料</button>
+      <button class="tab" data-tab="quote"><span class="tab-no">3</span>报价分享</button>
+    </nav>
+
+    <main>
+      <section id="screen-design" class="screen active"></section>
+      <section id="screen-seams" class="screen"></section>
+      <section id="screen-quote" class="screen"></section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
