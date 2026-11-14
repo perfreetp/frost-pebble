@@ -13,6 +13,10 @@ credentials*.json
 .npmrc
 .pypirc
 node_modules/
+dist/
+test-results/
+playwright-report/
+tests/tools/delivery.zip
 __pycache__/
 .venv/
 venv/

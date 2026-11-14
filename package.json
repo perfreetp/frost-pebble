@@ -1,0 +1,43 @@
+{
+  "name": "heying-crop-animation-workbench",
+  "version": "1.0.0",
+  "description": "禾影工坊 · 作物拟人角色 2D 骨骼动画与农技审核工作台（原生 TypeScript + Web Components + PixiJS）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/unit.test.mjs",
+    "test:e2e": "playwright test",
+    "test:all": "npm run typecheck && npm test && npm run test:e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perfreetp/frost-pebble.git"
+  },
+  "keywords": [
+    "animation",
+    "skeleton",
+    "pixijs",
+    "web-components",
+    "typescript",
+    "agriculture"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/perfreetp/frost-pebble/issues"
+  },
+  "homepage": "https://github.com/perfreetp/frost-pebble#readme",
+  "dependencies": {
+    "jszip": "^3.10.2",
+    "pixi.js": "^8.23.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "playwright": "^1.65.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.8"
+  }
+}

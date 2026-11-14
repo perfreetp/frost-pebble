@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>禾影工坊 · 作物骨骼动画工作台</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c110e;
+      --bg-deep: #080c09;
+      --panel: #141b16;
+      --panel-2: #19231c;
+      --panel-3: #1f2b22;
+      --elev: #243229;
+      --line: #2b3b30;
+      --line-soft: #223026;
+      --text: #e9f0e8;
+      --text-dim: #a3b4a5;
+      --text-faint: #718273;
+      --wheat: #e9b750;
+      --wheat-soft: #f0cd84;
+      --green: #73c17a;
+      --green-deep: #2f6b45;
+      --blue: #6fa8d6;
+      --red: #e07464;
+      --purple: #b198d8;
+      --radius: 10px;
+      --font: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", system-ui, sans-serif;
+      --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background:
+        radial-gradient(1200px 600px at 75% -10%, rgba(105, 160, 95, 0.13), transparent 60%),
+        radial-gradient(900px 500px at 10% 100%, rgba(233, 183, 80, 0.06), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 13px;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    #app { height: 100%; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: #2c3b31; border-radius: 6px; border: 2px solid transparent; background-clip: content-box; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    button, input, select, textarea { font-family: inherit; }
+    .mono { font-family: var(--mono); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+  <farm-app></farm-app>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
