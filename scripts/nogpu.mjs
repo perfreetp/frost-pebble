@@ -1,0 +1,21 @@
+import { chromium } from 'playwright-core';
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
+const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+await page.addInitScript(() => {
+  Object.defineProperty(Navigator.prototype, 'gpu', { get: () => undefined, configurable: true });
+});
+const errors = [];
+page.on('pageerror', (e) => errors.push(e.message));
+await page.goto('http://127.0.0.1:8123/', { waitUntil: 'networkidle' });
+await page.waitForTimeout(1500);
+const body = await page.locator('body').innerText();
+console.log('显示降级提示:', body.includes('WebGPU 不可用'));
+console.log('排布统计仍可用:', body.includes('表箱') && body.includes('96'));
+console.log('待派池可用:', body.includes('待派池'));
+await page.selectOption('.user-switch select', 'u-f1');
+await page.waitForTimeout(1000);
+const b2 = await page.locator('body').innerText();
+console.log('工作台可切换:', b2.includes('参数调整'));
+await page.screenshot({ path: 'scripts/s15-nogpu.png' });
+console.log('errors', errors.slice(0, 5));
+await browser.close();
