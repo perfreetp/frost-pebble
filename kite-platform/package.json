@@ -1,0 +1,26 @@
+{
+  "name": "kite-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "风筝扎制教学与考核平台 (SolidJS + three.js)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "esbuild test/logic.test.ts --bundle --platform=node --format=esm --outfile=test/.logic.mjs && node test/.logic.mjs && esbuild test/e2e.test.ts --bundle --platform=node --format=esm --target=es2022 --outfile=test/.e2e.mjs && node test/.e2e.mjs"
+  },
+  "dependencies": {
+    "solid-js": "^1.8.22",
+    "three": "^0.166.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.166.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vite-plugin-solid": "^2.10.2"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}
