@@ -1,0 +1,10 @@
+import { writeFileSync } from 'node:fs';
+import { generateGlyph, DEFAULT_PARAMS } from '../src/lib/generator';
+import { getSkeleton } from '../src/lib/skeletons';
+import { ringsToPath } from '../src/lib/geometry';
+const p = { ...DEFAULT_PARAMS, weight: 130, contrast: 0.5, corner: 10, terminal: 'round' as const };
+const r = generateGlyph({ char: '永', skeleton: getSkeleton('永')!, params: p });
+let colors = ['#c0392b','#2980b9','#27ae60','#8e44ad','#d35400'];
+let cells = r.polys.map((poly,i)=> `<path d="${ringsToPath([poly])}" fill="${colors[i%5]}" fill-rule="evenodd" fill-opacity="0.7"/>`).join('');
+writeFileSync('tests/out/hole.svg', `<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520"><g transform="translate(10,10) scale(0.5,-0.5) translate(0,-1000)"><rect width="1000" height="1000" fill="#f7f3e9"/>${cells}</g></svg>`);
+console.log(r.polys.map(p=>p.map(rr=>rr.length)));

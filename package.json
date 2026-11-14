@@ -1,0 +1,30 @@
+{
+  "name": "glyph-forge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "字形档案与生成平台 — Font design studio glyph archive & generation platform",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "tsx tests/gentest.ts && tsx tests/seedtest.ts",
+    "shots": "node tests/shot.mjs",
+    "test:e2e": "node tests/e2e.mjs"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@types/earcut": "^3.0.0",
+    "puppeteer-core": "^25.17.0",
+    "svelte": "^5.57.3",
+    "svelte-check": "^4.7.8",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "earcut": "^3.2.4",
+    "polygon-clipping": "^0.15.7"
+  }
+}
