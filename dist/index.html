@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>轿厢装潢配置器</title>
+  <script type="module" crossorigin src="/assets/index-BDYSVo14.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Dpt_mJnq.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="brand">轿厢装潢配置器</div>
+      <div id="project-label">未新建项目</div>
+      <div class="topbar-actions">
+        <div class="seg" id="mode-seg">
+          <button data-mode="clay" class="active">白模</button>
+          <button data-mode="render">效果图</button>
+        </div>
+        <select id="lighting-select" title="光照预设">
+          <option value="office">办公照明</option>
+          <option value="residential">住宅照明</option>
+          <option value="garage">地库照明</option>
+        </select>
+        <button id="btn-new">新建项目</button>
+        <button id="btn-apply-template" disabled>套用同型号配置</button>
+        <button id="btn-export-quote" disabled>导出报价单</button>
+        <button id="btn-export-config" disabled>导出方案文件</button>
+        <button id="btn-import-config">导入方案</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden />
+      </div>
+    </header>
+    <main id="main">
+      <aside id="panel">
+        <div id="panel-empty" class="panel-placeholder">
+          <p>点击「新建项目」开始配置轿厢方案</p>
+        </div>
+        <div id="panel-body" hidden></div>
+      </aside>
+      <section id="viewport-wrap">
+        <canvas id="viewport"></canvas>
+        <div id="viewport-hint">拖拽旋转 · 滚轮缩放 · 右键平移</div>
+        <div id="toast" hidden></div>
+      </section>
+      <aside id="summary">
+        <h3>方案清单</h3>
+        <div id="summary-body"><p class="muted">暂无方案</p></div>
+      </aside>
+    </main>
+
+    <!-- 新建项目对话框 -->
+    <dialog id="dlg-new">
+      <form method="dialog" id="form-new">
+        <h3>新建项目</h3>
+        <label>项目名称 <input name="name" value="未命名项目" required /></label>
+        <label>梯型
+          <select name="carType">
+            <option value="passenger">乘客梯</option>
+            <option value="freight">载货梯</option>
+            <option value="home">家用梯</option>
+          </select>
+        </label>
+        <div class="grid2">
+          <label>内宽 (mm) <input name="width" type="number" value="1600" min="800" max="3000" step="10" required /></label>
+          <label>内深 (mm) <input name="depth" type="number" value="1500" min="800" max="3000" step="10" required /></label>
+          <label>内高 (mm) <input name="height" type="number" value="2400" min="2000" max="3000" step="10" required /></label>
+          <label>载重 (kg) <input name="load" type="number" value="1000" min="250" max="5000" step="50" required /></label>
+        </div>
+        <label>开门方式
+          <select name="doorType">
+            <option value="center">中分门</option>
+            <option value="folding">双折门</option>
+            <option value="side">旁开门</option>
+          </select>
+        </label>
+        <menu>
+          <button value="cancel" formnovalidate>取消</button>
+          <button value="ok" class="primary">创建</button>
+        </menu>
+      </form>
+    </dialog>
+  </div>
+</body>
+</html>
