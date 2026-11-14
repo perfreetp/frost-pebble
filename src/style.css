@@ -1,0 +1,108 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif; background: #f0f3f7; color: #2c3e50; }
+#app { min-height: 100vh; }
+
+/* 顶栏 */
+.topbar { display: flex; align-items: center; gap: 24px; padding: 0 20px; height: 52px; background: #1f3a5f; color: #fff; }
+.topbar .brand { font-weight: 700; font-size: 15px; }
+.topbar nav { display: flex; gap: 16px; flex: 1; }
+.topbar nav a { color: #bcd2ee; text-decoration: none; font-size: 14px; }
+.topbar nav a.router-link-active { color: #fff; font-weight: 600; }
+.topbar .user { font-size: 13px; }
+.topbar .logout { margin-left: 10px; color: #9fc1ff; cursor: pointer; }
+
+/* 页面 */
+.page { padding: 20px 28px; }
+.page.narrow { max-width: 520px; }
+.page-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.page-head h2 { margin: 0; }
+.page h3 { margin: 22px 0 10px; }
+.empty { color: #8a97a5; }
+.tip { color: #7a8899; font-size: 13px; }
+.error { color: #c0392b; }
+.ok { color: #1e8e4f; font-size: 13px; }
+.warn { color: #c0392b; font-size: 13px; background: #fdecea; padding: 6px 8px; border-radius: 4px; }
+.warn.orange { color: #b26a00; background: #fff4e0; }
+.text-red { color: #c0392b; }
+.text-green { color: #1e8e4f; }
+.text-orange { color: #e08a00; }
+
+/* 按钮 */
+.btn { display: inline-block; padding: 7px 14px; border: 1px solid #c4cfdb; background: #fff; color: #2c3e50; border-radius: 4px; cursor: pointer; font-size: 13px; text-decoration: none; }
+.btn:hover { border-color: #2f6fd0; color: #2f6fd0; }
+.btn.primary { background: #2f6fd0; border-color: #2f6fd0; color: #fff; }
+.btn.primary:hover { background: #275cb0; }
+.btn.danger { background: #d9534f; border-color: #d9534f; color: #fff; }
+.btn.small { padding: 4px 10px; font-size: 12px; }
+.btn.ghost { background: transparent; }
+.btn.active { background: #2f6fd0; color: #fff; border-color: #2f6fd0; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* 徽章 */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; background: #e3e9f0; color: #55677c; }
+.badge.designing { background: #e3e9f0; }
+.badge.submitted { background: #d6e6fb; color: #1c5aa0; }
+.badge.approved { background: #d9f0de; color: #1e8e4f; }
+.badge.violation, .badge.rejected { background: #fdecea; color: #c0392b; }
+
+/* 表格 */
+.table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+.table th, .table td { padding: 8px 10px; border-bottom: 1px solid #e6ebf1; text-align: left; }
+.table th { background: #f6f8fb; color: #55677c; font-weight: 600; }
+.table .sum-row td { font-weight: 700; background: #f6f8fb; }
+.table-scroll { max-height: 480px; overflow: auto; border: 1px solid #e6ebf1; }
+.table-scroll .table th { position: sticky; top: 0; }
+
+/* 信息块 */
+.info-grid { display: flex; gap: 28px; background: #fff; padding: 14px 18px; border-radius: 6px; flex-wrap: wrap; }
+.info-grid span { color: #8a97a5; font-size: 12px; margin-right: 8px; }
+
+/* 表单 */
+.form { display: flex; flex-direction: column; gap: 14px; background: #fff; padding: 22px; border-radius: 6px; }
+.form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #55677c; }
+.form input, .form select, .modal input { padding: 8px 10px; border: 1px solid #c4cfdb; border-radius: 4px; font-size: 14px; }
+
+/* 登录 */
+.login-page { max-width: 760px; margin: 8vh auto; text-align: center; }
+.login-page .sub { color: #7a8899; }
+.name-input { padding: 8px 12px; border: 1px solid #c4cfdb; border-radius: 4px; margin: 10px 0 20px; width: 240px; }
+.role-cards { display: flex; gap: 18px; justify-content: center; }
+.role-card { flex: 1; background: #fff; border: 1px solid #dfe6ee; border-radius: 8px; padding: 22px 16px; cursor: pointer; transition: all .15s; }
+.role-card:hover { border-color: #2f6fd0; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(47,111,208,.12); }
+.role-card p { color: #7a8899; font-size: 13px; }
+
+/* 编辑器 */
+.editor-page { display: flex; flex-direction: column; height: calc(100vh - 52px); }
+.toolbar { display: flex; align-items: center; gap: 10px; padding: 8px 14px; background: #fff; border-bottom: 1px solid #dfe6ee; flex-wrap: wrap; }
+.toolbar .sep { width: 1px; height: 20px; background: #dfe6ee; margin: 0 4px; }
+.layer-toggle { font-size: 13px; color: #55677c; display: flex; align-items: center; gap: 3px; }
+.readonly-tip { font-size: 12px; color: #8a97a5; }
+.progress-text { font-size: 13px; color: #55677c; }
+.editor-body { flex: 1; display: flex; min-height: 0; }
+.canvas-wrap { flex: 1; position: relative; min-width: 0; }
+.canvas-wrap canvas { width: 100%; height: 100%; display: block; outline: none; }
+.side { width: 280px; background: #fff; border-left: 1px solid #dfe6ee; padding: 14px 16px; overflow-y: auto; }
+.side h3 { margin: 0 0 12px; }
+.side h4 { margin: 18px 0 8px; }
+.kv { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #edf1f5; font-size: 13px; }
+.kv span { color: #8a97a5; }
+.config-row { display: flex; gap: 8px; }
+.config-row select { flex: 1; padding: 6px; border: 1px solid #c4cfdb; border-radius: 4px; }
+.review-actions { margin-top: 14px; }
+.reject-box { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.reject-box textarea { border: 1px solid #c4cfdb; border-radius: 4px; padding: 8px; font-family: inherit; resize: vertical; }
+
+/* 弹窗 */
+.modal-mask { position: fixed; inset: 0; background: rgba(20,30,45,.4); display: flex; align-items: center; justify-content: center; z-index: 20; }
+.modal { background: #fff; border-radius: 8px; padding: 22px; width: 360px; display: flex; flex-direction: column; gap: 12px; }
+.modal h3 { margin: 0; }
+.modal label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #55677c; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* 看板 */
+.dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.dash-card { background: #fff; border-radius: 6px; padding: 14px 16px; }
+.dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.bar { height: 8px; background: #edf1f5; border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; background: #3bb273; transition: width .3s; }
+.dash-nums { display: flex; gap: 14px; margin-top: 10px; font-size: 12px; color: #55677c; }
